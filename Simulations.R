@@ -4,11 +4,11 @@ library(survival)
 set.seed(1234)
 n <- 100
 
-est <- rep(0,1000)
-truth <- rep(0,1000)
-est_PDRE <- rep(0,1000)
-est_IPCW <- rep(0,1000)
-est_DRE <- rep(0,1000)
+est <- rep(0,1000) #the PCE
+truth <- rep(0,1000) #true p(T>0.5)
+est_PDRE <- rep(0,1000) # PDRE
+est_IPCW <- rep(0,1000) # FIE
+est_DRE <- rep(0,1000) # DRE
 
 
 
@@ -745,10 +745,10 @@ for (g in 1:1000){
 set.seed(1234)
 n <- 100
 
-truth <- rep(0,1000)
-est_IPCW_truth <- rep(0,1000)
-est_DRE_truth <- rep(0,1000)
-est_KM <- rep(0,1000)
+truth <- rep(0,1000) #true p(T>0.5
+est_IPCW_truth <- rep(0,1000) # FIE-truth
+est_DRE_truth <- rep(0,1000) # DRE-truth
+est_KM <- rep(0,1000) # KM
 
 
 for (g in 1:1000){
