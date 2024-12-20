@@ -4,10 +4,11 @@ library(survival)
 set.seed(1234)
 n <- 100
 
-est <- rep(0,1000) #the PCE
+est_PEE <- rep(0,1000) #PEE
+est_PCE <- rep(0,1000) #the PCE
 truth <- rep(0,1000) #true p(T>0.5)
 est_PDRE <- rep(0,1000) # PDRE
-est_IPCW <- rep(0,1000) # FIE
+est_FIE <- rep(0,1000) # FIE
 est_DRE <- rep(0,1000) # DRE
 
 
@@ -178,7 +179,7 @@ for (g in 1:1000){
   }
   
   
-  est[g] <- PCE(0.5) #estimator
+  est_PCE[g] <- PCE(0.5) #estimator
   
   
   # finding all T_tilde where delta == 0 and T_tilde <= 0.5 as we are interrested  i P(T>0.5)
@@ -264,7 +265,12 @@ for (g in 1:1000){
   }
   
   
-  
+PEE <- 0
+for (i in 1:n){
+  PEE <- PEE + weights[i]*exp((B_0[1]+B_W[1]*W[i]+B_X[1]*X[i]))
+
+}
+est_PEE[g] <- PEE/n
   
   PDRE <- function(t){
     T_PCE <- T_tilde[which(delta == 1)]
@@ -724,7 +730,7 @@ for (g in 1:1000){
     
   }
   
-  est_IPCW[g] <- PCE(0.5)
+  est_FIE[g] <- PCE(0.5)
   
   
   
